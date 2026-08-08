@@ -1,153 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AccrediTrack</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f4f7fb;
-            color: #1f2937;
-        }
+<title>AccrediTrack Dashboard</title>
 
-        header {
-            background: #123c78;
-            color: white;
-            text-align: center;
-            padding: 35px 20px;
-        }
+<style>
 
-        header h1 {
-            font-size: 42px;
-            margin: 0;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        header p {
-            font-size: 20px;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
 
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-        }
+/* Header */
 
-        .card {
-            background: white;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-        }
+.header {
+    background: #123c78;
+    color: white;
+    padding: 25px 40px;
+}
 
-        h2 {
-            color: #123c78;
-        }
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+}
 
-        .buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+.header p {
+    margin: 6px 0 0;
+}
 
-        button {
-            padding: 14px 22px;
-            border: none;
-            border-radius: 8px;
-            background: #167a4a;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+/* Layout */
 
-        button:hover {
-            background: #0f5e38;
-        }
+.layout {
+    display: flex;
+    min-height: 650px;
+}
 
-        .status {
-            font-size: 20px;
-            color: #167a4a;
-            font-weight: bold;
-        }
+/* Sidebar */
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #123c78;
-            color: white;
-        }
-    </style>
+.sidebar {
+    width: 230px;
+    background: #ffffff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+}
+
+.sidebar h3 {
+    color: #123c78;
+    margin-top: 5px;
+}
+
+.menu {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 7px;
+    background: #f1f5f9;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu:hover {
+    background: #dbeafe;
+}
+
+/* Main */
+
+.main {
+    flex: 1;
+    padding: 30px;
+}
+
+.main h2 {
+    margin-top: 0;
+    color: #123c78;
+}
+
+/* Cards */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 15px;
+    color: #64748b;
+}
+
+.number {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #123c78;
+}
+
+/* Criteria */
+
+.criteria {
+    margin-top: 25px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.criteria-row {
+    margin: 18px 0;
+}
+
+.criteria-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.progress {
+    height: 13px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #167a4a;
+}
+
+/* Buttons */
+
+.action-buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.action {
+    padding: 14px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #167a4a;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.action:hover {
+    background: #0f5e38;
+}
+
+/* Footer */
+
+.footer {
+    text-align: center;
+    padding: 18px;
+    background: #123c78;
+    color: white;
+}
+
+/* Mobile */
+
+@media(max-width: 800px) {
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 500px) {
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        padding: 20px;
+    }
+
+    .main {
+        padding: 20px;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-<header>
+<!-- HEADER -->
+
+<div class="header">
+
     <h1>AccrediTrack</h1>
-    <p>Smart NAAC Evidence Management & Verification System</p>
-    <p>स्मार्ट NAAC पुरावा व्यवस्थापन व पडताळणी प्रणाली</p>
-</header>
 
-<div class="container">
+    <p>
+        Smart NAAC Evidence Management & Verification System
+    </p>
 
-    <div class="card">
-        <h2>About the Project | प्रकल्पाबद्दल</h2>
+    <p>
+        स्मार्ट NAAC पुरावा व्यवस्थापन व पडताळणी प्रणाली
+    </p>
 
-        <p>
-            AccrediTrack is a smart system designed to organize,
-            manage and verify NAAC accreditation evidence.
-        </p>
+</div>
 
-        <p>
-            AccrediTrack ही NAAC मानांकनासाठी आवश्यक पुरावे
-            व्यवस्थित साठवणे, व्यवस्थापित करणे आणि पडताळणे
-            यासाठी तयार केलेली प्रणाली आहे.
-        </p>
+
+<!-- MAIN LAYOUT -->
+
+<div class="layout">
+
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h3>AccrediTrack</h3>
+
+        <button class="menu">🏠 Dashboard</button>
+
+        <button class="menu">📁 Evidence</button>
+
+        <button class="menu">🔍 Search Evidence</button>
+
+        <button class="menu">📷 QR Verification</button>
+
+        <button class="menu">📊 Reports</button>
+
+        <button class="menu">⚙ Settings</button>
+
     </div>
 
-    <div class="card">
-        <h2>Project Demo | प्रकल्पाचे प्रात्यक्षिक</h2>
 
-        <p class="status">✓ Demo Prototype Available</p>
+    <!-- MAIN CONTENT -->
 
-        <div class="buttons">
-            <button>View Dashboard</button>
-            <button>Evidence Verification</button>
-            <button>QR Verification</button>
+    <div class="main">
+
+        <h2>
+            Dashboard | डॅशबोर्ड
+        </h2>
+
+        <p>
+            NAAC Evidence Overview
+            | NAAC पुराव्यांचा आढावा
+        </p>
+
+
+        <!-- SUMMARY CARDS -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Total Evidence</h3>
+
+                <div class="number">
+                    156
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Verified Evidence</h3>
+
+                <div class="number">
+                    142
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Pending Evidence</h3>
+
+                <div class="number">
+                    14
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>NAAC Readiness</h3>
+
+                <div class="number">
+                    87%
+                </div>
+
+            </div>
+
         </div>
-    </div>
 
-    <div class="card">
-        <h2>Key Features | प्रमुख वैशिष्ट्ये</h2>
 
-        <ul>
-            <li>NAAC Evidence Management</li>
-            <li>Criteria-wise Organization</li>
-            <li>QR Based Evidence Verification</li>
-            <li>Document Search</li>
-            <li>Evidence Status Tracking</li>
-            <li>Report Generation</li>
-            <li>Offline Application Support</li>
-        </ul>
-    </div>
+        <!-- CRITERIA -->
 
-    <div class="card">
-        <h2>Research Project | संशोधन प्रकल्प</h2>
+        <div class="criteria">
 
-        <p>
-            AccrediTrack focuses on improving the organization,
-            accessibility and verification of institutional
-            accreditation evidence.
-        </p>
+            <h2>
+                NAAC Criteria Progress
+            </h2>
+
+            <div class="criteria-row">
+
+                <div class="criteria-title">
+                    <span>Criteria 1 – Curricular Aspects</span>
+                    <b>82%</b>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width:82%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="criteria-row">
+
+                <div class="criteria-title">
+                    <span>Criteria 2 – Teaching Learning</span>
+                    <b>75%</b>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width:75%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="criteria-row">
+
+                <div class="criteria-title">
+                    <span>Criteria 3 – Research</span>
+                    <b>91%</b>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width:91%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="criteria-row">
+
+                <div class="criteria-title">
+                    <span>Criteria 4 – Infrastructure</span>
+                    <b>68%</b>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width:68%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="criteria-row">
+
+                <div class="criteria-title">
+                    <span>Criteria 5 – Student Support</span>
+                    <b>88%</b>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width:88%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="criteria-row">
+
+                <div class="criteria-title">
+                    <span>Criteria 6 – Governance</span>
+                    <b>79%</b>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width:79%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="criteria-row">
+
+                <div class="criteria-title">
+                    <span>Criteria 7 – Institutional Values</span>
+                    <b>84%</b>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width:84%"></div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="action-buttons">
+
+            <button class="action">
+                ➕ Add Evidence
+            </button>
+
+            <button class="action">
+                🔍 Search Evidence
+            </button>
+
+            <button class="action">
+                📷 Verify QR
+            </button>
+
+            <button class="action">
+                📄 Generate Report
+            </button>
+
+        </div>
+
     </div>
 
 </div>
 
-<footer>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
     AccrediTrack | Smart NAAC Evidence Management
-</footer>
+
+</div>
 
 </body>
 </html>
